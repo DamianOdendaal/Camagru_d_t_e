@@ -16,7 +16,7 @@
     $vkey = substr(str_shuffle($str), 0, 8);
     $statement->bindValue(4, $vkey);
     $_SESSION["Token"] = $vkey;
-    $statement->bindvALUE(5, "Inactive");
+    $statement->bindvalue(5, "Inactive");
     $_SESSION["Status"] = "Inactive";
     $statement->bindValue(6, "Offline");
     $_SESSION["Connection"] = "Offline";

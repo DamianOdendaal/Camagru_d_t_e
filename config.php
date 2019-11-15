@@ -1,8 +1,8 @@
 <?php
     session_start();
-    $username = $_SESSION["Username"];
     include ("connect.php");
     include ("database.php");
+    // $username = $_SESSION["Username"];                   // ask why this is here
     try {
         $db = new PDO("mysql:host=localhost", $DB_USER, $DB_PASSWORD);
     }

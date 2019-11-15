@@ -1,9 +1,10 @@
 <?php
-    include ("database.php");
-    try {
-        $db = new PDO("$DB_DSN, $DB_USER, $DB_PASSWORD);
-    }
-    catch (exception $e){
-        echo "An error as occurred";
-    }
+   include('database.php');
+  try {
+      $DB_NAME = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+      $DB_NAME->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      echo 'Connected to the database';
+  } catch (PDOException $e) {
+		echo $sql . "<br>" . $e->getMessage();
+  }
 ?>

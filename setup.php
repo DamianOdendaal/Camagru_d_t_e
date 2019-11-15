@@ -5,7 +5,7 @@
 	
     try 
 	{
-		$conn = new PDO($DB_SERVER, $DB_USER, $DB_PASSWORD);
+		$conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = "CREATE DATABASE IF NOT EXISTS $DB_NAME";
 		$conn->exec($sql);
@@ -16,7 +16,7 @@
 		$sql = "CREATE TABLE IF NOT EXISTS users 
 		(
 			ID INT(255) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-			Username VARCHAR(255) UNIQUE NOT NULL,
+			Username VARCHAR(255) NOT NULL,
 			Password TEXT NOT NULL,
 			Email VARCHAR(255) UNIQUE NOT NULL,
 			Token VARCHAR(255) UNIQUE NOT NULL,
@@ -29,8 +29,8 @@
 		$sql = "CREATE TABLE IF NOT EXISTS images 
 		(
 			ID INT(255) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-			Username VARCHAR(255) UNIQUE NOT NULL,
-			FOREIGN KEY (Username) REFERENCES users(Username), 
+			Username VARCHAR(255) NOT NULL,
+			FOREIGN KEY (Username) REFERENCES users(Username)
 		)";
 		$conn->exec($sql);
 		echo "The images table was successfully created<br/>";
@@ -39,7 +39,7 @@
 		$sql = "CREATE TABLE IF NOT EXISTS comments
 		(
 			Comment TEXT NOT NULL,
-			Username VARCHAR(255) UNIQUE NOT NULL,
+			Username VARCHAR(255) NOT NULL,
 			FOREIGN KEY (Username) REFERENCES users(Username),
 			Image VARCHAR(255) NOT NULL
 		)";
@@ -49,7 +49,7 @@
 
 		$sql = "CREATE TABLE IF NOT EXISTS likes
 		(
-			Username VARCHAR(255) UNIQUE NOT NULL,
+			Username VARCHAR(255) NOT NULL,
 			FOREIGN KEY (Username) REFERENCES users(Username),
 			Image VARCHAR(255) NOT NULL
 		)";

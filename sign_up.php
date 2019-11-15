@@ -71,7 +71,7 @@
                 text-align: center;
             }
         </style>
-        <link rel="stylesheet" href="stylesheet.css">
+        <!-- <link rel="stylesheet" href="stylesheet.css"> -->
     </head>
     <body>
         <form action="create.php" method="post">

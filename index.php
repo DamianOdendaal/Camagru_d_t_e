@@ -1,5 +1,5 @@
 <?php
-    header ("location: pagination.php")
+    // header ("location: pagination.php")
 ?>
 <!DOCTYPE html>
 <html>

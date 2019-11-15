@@ -21,23 +21,18 @@
 		$sql = "USE $DB_NAME;";
         $conn->exec($sql);
         
-	
-	
-        // lets create tables for users, images, likes and comments
-        
 		$sql = "CREATE TABLE IF NOT EXISTS users 
 		(
-			user_id INT(255) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-			user_name VARCHAR(255) UNIQUE NOT NULL,
-			email VARCHAR(255) UNIQUE NOT NULL,
-			password TEXT NOT NULL,
-			activated BOOLEAN DEFAULT false,
-			notification_recieved BOOLEAN NOT NULL	
+			ID INT(255) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+			Username VARCHAR(255) UNIQUE NOT NULL,
+			Password TEXT NOT NULL,
+			Email VARCHAR(255) UNIQUE NOT NULL,
+			Token VARCHAR(255) UNIQUE NOT NULL,
+			Status VARCHAR(10)  NOT NULL	
 		)";
 		$conn->exec($sql);
         echo "The users table was successfully created<br/>";
         
-		// create table images that references user with a foreign key
         
 		$sql = "CREATE TABLE IF NOT EXISTS images 
 		(
@@ -49,25 +44,24 @@
 		)";
 		$conn->exec($sql);
 		echo "The images table was successfully created<br/>";
-		// create table comments that will reference user with a foreign key
+
+		
 		$sql = "CREATE TABLE IF NOT EXISTS comments
 		(
-			comment_id INT(255) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-			user_id INT(255) NOT NULL,
-			FOREIGN KEY (user_id) REFERENCES users(user_id),
-			date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-			comment TEXT NOT NULL
+			Comment TEXT NOT NULL,
+			Username INT(255) NOT NULL,
+			FOREIGN KEY (Username) REFERENCES users(Username),
+			Image VARCHAR(255) NOT NULL
 		)";
 		$conn->exec($sql);
 		echo "The comments table was successfully created<br/>";
-	// create table likes that will reference user with a foreign key
+
+
 		$sql = "CREATE TABLE IF NOT EXISTS likes
 		(
-			like_id INT(255) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-			user_id INT(255) NOT NULL,
-			FOREIGN KEY (user_id) REFERENCES users(user_id),
-			like_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,	
-			like_count INT NOT NULL
+			Username INT(255) NOT NULL,
+			FOREIGN KEY (Username) REFERENCES users(Username),
+			Image VARCHAR(255) NOT NULL
 		)";
 		$conn->exec($sql);
 		echo "The likes table was successfully created<br/>";

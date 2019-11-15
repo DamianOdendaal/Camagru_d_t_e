@@ -4,7 +4,9 @@
     $check = $db->query("SELECT Username, Email FROM users");
     $results = $check->fetchall();
     $username = $_POST["Username"];
+
     $password_hash = hash("whirlpool", $_POST["Password"]);
+
     $statement = $db->prepare('INSERT INTO `users` (`Username`, `Password`, `Email`, `Token`, `Status`, `Connection`) VALUES (?, ?, ?, ?, ?, ?)');
     $statement->bindValue(1, $_POST["Username"]);
     $_SESSION["Username"] = $_POST["Username"];

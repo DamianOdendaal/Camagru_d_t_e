@@ -29,8 +29,7 @@
 		$sql = "CREATE TABLE IF NOT EXISTS images 
 		(
 			ID INT(255) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-			Username VARCHAR(255) NOT NULL,
-			FOREIGN KEY (Username) REFERENCES users(Username)
+			Username VARCHAR(255) NOT NULL
 		)";
 		$conn->exec($sql);
 		echo "The images table was successfully created<br/>";
@@ -40,7 +39,6 @@
 		(
 			Comment TEXT NOT NULL,
 			Username VARCHAR(255) NOT NULL,
-			FOREIGN KEY (Username) REFERENCES users(Username),
 			Image VARCHAR(255) NOT NULL
 		)";
 		$conn->exec($sql);
@@ -50,7 +48,6 @@
 		$sql = "CREATE TABLE IF NOT EXISTS likes
 		(
 			Username VARCHAR(255) NOT NULL,
-			FOREIGN KEY (Username) REFERENCES users(Username),
 			Image VARCHAR(255) NOT NULL
 		)";
 		$conn->exec($sql);

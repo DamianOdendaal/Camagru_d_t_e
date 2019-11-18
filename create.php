@@ -1,15 +1,18 @@
 <?php
     session_start();
     include ("connect.php");
-    $check = $db->query("SELECT Username, Email FROM users");
+    include ("database.php");
+    // require_once 'connect.php';
+    $conn->query("SELECT * FROM users");
+    $check = $DB_NAME->query("SELECT Username, Email FROM users");
     $results = $check->fetchall();
-    $username = $_POST["Username"];
 
+    $username = $_POST["Username"];
     $password_hash = hash("whirlpool", $_POST["Password"]);
 
-    $statement = $db->prepare('INSERT INTO `users` (`Username`, `Password`, `Email`, `Token`, `Status`, `Connection`) VALUES (?, ?, ?, ?, ?, ?)');
-    $statement->bindValue(1, $_POST["Username"]);
-    $_SESSION["Username"] = $_POST["Username"];
+    $statement = $conn->prepare('INSERT INTO `users` (`Username`, `Password`, `Email`, `Token`, `Status`, `Connection`) VALUES (?, ?, ?, ?, ?, ?)');
+    $statement->bindValue(1, $username);
+    $_SESSION["Username"] = $username;
     $statement->bindValue(2, $password_hash);
     $_SESSION["Password"] = $_POST["Password"];
     $statement->bindValue(3, $_POST["Email"]);

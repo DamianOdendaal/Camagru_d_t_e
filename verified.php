@@ -1,16 +1,11 @@
 <?php
     include ("connect.php");
     session_start();
-    $username = $_SESSION["Username"];
-    $vkey =  $_GET['vkey'];
-    $result = $db->query("SELECT Token FROM users WHERE Username='$username'");
-    $db_vkey = $result->fetch();
-    if ($db_vkey['Token'] === $vkey)
-    {
-        $statemnet = $db->prepare("UPDATE users SET Status='Active', Token='Done' WHERE Username=?");
-        $statemnet->bindValue(1, $username);
-        $statemnet->execute();
-    }
+    
+    //$username = $_SESSION["Username"];
+    // $vkey = $_GET['token'];
+    // $result = $conn->prepare("SELECT Token FROM camagru.users WHERE Username='$username'");
+    // $db_vkey = $result->fetch();
     //Dont forget to destroy sessions.
 ?>
 <html>
@@ -46,7 +41,7 @@
         <section class="confirm">
             <span class="text">Success!</span>
             <p class="text_2">Congratulations. You have successfully verified your Email.</p><br/>
-            <a href="link">Click Here to go back to Camagru</a>
+            <a href="index.php">Click Here to go back to Camagru</a>
         </section>
     </body>
 </html>

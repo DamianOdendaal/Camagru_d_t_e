@@ -33,7 +33,7 @@
             $subject = "Verification link";
 
 
-            // TODO: Stop being a dodo and fix the link,
+            // TODO: Stop being a dodo and fix the link, 
             $msg = "Click on the link below to verify email:\n ".$_SERVER['HTTP_HOST']."/verified.php?vkey=$vkey";
             sendVerification($to, $subject, $msg);
             header("location: confirmation.php");

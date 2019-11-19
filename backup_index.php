@@ -1,4 +1,10 @@
-<?php?>
+<?php
+    // $pro_name = explode("/", $_SERVER['SCRIPT_NAME']);
+    // $var = $_SERVER['HTTP_HOST'];
+    // $s = "/";
+    // $ples = $var.$s.$pro_name[1].$s;
+    // print_r($ples);
+?>
 <!DOCTYPE html>
 <html>
     <head>

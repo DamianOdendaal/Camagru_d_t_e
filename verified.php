@@ -45,7 +45,8 @@
         </header>
         <section class="confirm">
             <span class="text">Success!</span>
-            <p class="text_2">Congratulations. You have successfully verified your Email.</p>
+            <p class="text_2">Congratulations. You have successfully verified your Email.</p><br/>
+            <a href="link">Click Here to go back to Camagru</a>
         </section>
     </body>
 </html>

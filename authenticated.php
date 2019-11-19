@@ -1,18 +1,18 @@
 <?php
     session_start();
     include ("connect.php");
-    $_SESSION["Username"] = $_POST["Username"];
-    $_SESSION["Password"] = $_POST["Password"];
-    $password_hash = hash("whirlpool", $_POST["Password"]);
-    $statement = $db->query("SELECT Username, Password, Status FROM users");
+    $Username = $_POST["Username"];
+    $Password = $_POST["Password"];
+    $password_hash = hash("", $_POST["Password"]);
+    $statement = $db->query("SELECT Username, Password, Status FROM camagru.users");
     $authenticate = $statement->fetchall();
-    $x = 0;
-    header("location: Disconnected.html");
-    while ($x < count($authenticate))
+    $index = 0;
+    // header("location: Disconnected.html");
+    while ($index < count($authenticate))
     {
-        if ($_SESSION["Username"] === $authenticate[$x]["Username"])
+        if ($_SESSION["Username"] === $authenticate[$index]["Username"])
         {
-            if (($password_hash === $authenticate[$x]["Password"]) && ($authenticate[$x]["Status"] === "Active"))
+            if (($password_hash === $authenticate[$index]["Password"]) && ($authenticate[$index]["Status"] === "Active"))
             {
                 $statement_2 = $db->prepare("UPDATE users SET Connection='Online' WHERE Username=?");
                 $statement_2->bindValue(1, $_SESSION["Username"]);
@@ -20,6 +20,6 @@
                 header("location: user_gallery.php");
             }
         }
-        $x++;
+        $index++;
     }
 ?>

@@ -17,7 +17,7 @@
         }
         //Set the offset for the query
         $offset = ($page_no - 1) * $total_items_per_page;
-        $statement = $conn->query("SELECT Image, Username FROM user_images LIMIT $offset, $total_items_per_page");
+        $statement = $conn->query("SELECT Image, Username FROM camagru.images LIMIT $offset, $total_items_per_page");
         $items_array = $statement->fetchall();
         //var_dump($items_array);
         //get the total number of pages.

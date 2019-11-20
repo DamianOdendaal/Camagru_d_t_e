@@ -1,7 +1,7 @@
 <?php
     session_start();
     include ("connect.php");
-    $statement = $db->prepare("UPDATE users SET Connection='Offline' WHERE Username=?");
+    $statement = $conn->prepare("UPDATE users SET Connection='Offline' WHERE Username=?");
     $statement->bindValue(1, $_SESSION["Username"]);
     $statement->execute();
     session_destroy();

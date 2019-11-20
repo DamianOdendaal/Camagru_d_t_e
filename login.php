@@ -72,13 +72,13 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <form action="Auth.php" method="post">
+        <form action="authenticated.php" method="post">
             <br />
             <fieldset class="border">
                 <legend>Login</legend>
                 <img class="logo" src="Pictures/Untitled.png">
-                <p><input class="bs" type="text" name="Username" placeholder=" Enter Username" pattern="[^]{1,}" title="Username is not valid" required></p>
-                <p><input class="bs" type="password" name="Password" placeholder=" Enter Password" pattern="{1,}" title="Password not valid" required></p>
+                <p><input class="bs" type="text"  name="Username" placeholder=" Enter Username" pattern="[^]{1,}" title="Username is not valid" required></p>
+                <p><input class="bs" type="password"  name="Password" placeholder=" Enter Password" pattern="{1,}" title="Password not valid" required></p>
                 <input class="submit" type="submit" name="Submit" value="Login">
                 <p class="bs_3">OR</p>
                 <a style="font-family: monospace; position: relative; left: 102px; font-size: 15px" href="forgot_password.php">forgot password</a>

@@ -5,7 +5,7 @@
     $image_name = $array[1];
     $imageTmpName = $_SESSION['tmp_loc'];
     $imagePath = "Uploads/$image_name";
-    $result = $db->prepare("INSERT INTO `user_images` (`Image`, `Username`) VALUES (?, ?)");
+    $result = $conn->prepare("INSERT INTO `user_images` (`Image`, `Username`) VALUES (?, ?)");
     $result->bindValue(1, $imagePath);
     $result->bindValue(2, $_SESSION['Username']);
     $result->execute();

@@ -91,7 +91,7 @@
             <nav>
                 <a class="gal" href="pagination.php">GALLERY</a>
                 <a class="gal" href="sign_up.php">SIGNUP</a>
-                <a class="gal" href="login.html">LOGIN</a>
+                <a class="gal" href="login.php">LOGIN</a>
             </nav>
             <main>
             </main>

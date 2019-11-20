@@ -1,7 +1,7 @@
 <?php
     require_once ("database.php");
     require_once ("connect.php");
-    require_once('mail_func.php');
+    require_once ('mail_func.php');
     session_start();
     
     try
@@ -11,13 +11,15 @@
         $check->bindParam(1, $_POST['Username']);
         $check->bindParam(2, $_POST['Email']);
         $check->execute();
-        // $results = $check->rowCount();
+        $results = 0;
         $result_count = 0;
         if ($results == $result_count)
         {
             $result_count += 1;
+            $_SESSION['Username'] = $_POST["Username"];
             $username = $_POST["Username"];
-            $password_hash = hash("sha512", $_POST['Password']);
+            $password_hash = hash("sha512", $_POST["Password"]);
+            // echo "Username = ".$username . "Passowrd".$password_hash;
         
             $statement = $conn->prepare('INSERT INTO camagru.`users` (`Username`, `Password`, `Email`, `Token`) VALUES (?, ?, ?, ?)');
             $vkey = hash("sha512", $username . $_POST['Email']);
@@ -32,9 +34,6 @@
             $to = $_POST['Email'];
             $subject = "Verification link";
 
-
-            // TODO: Stop being a dodo and fix the link, 
-            $msg = "Click on the link below to verify email:\n ".$_SERVER['HTTP_HOST']."/verified.php?vkey=$vkey";
             sendVerification($to, $subject, $msg);
             header("location: confirmation.php");
         }

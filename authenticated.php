@@ -1,25 +1,29 @@
 <?php
     session_start();
-    include ("connect.php");
-    $Username = $_POST["Username"];
-    $Password = $_POST["Password"];
-    $password_hash = hash("", $_POST["Password"]);
-    $statement = $db->query("SELECT Username, Password, Status FROM camagru.users");
-    $authenticate = $statement->fetchall();
-    $index = 0;
-    // header("location: Disconnected.html");
-    while ($index < count($authenticate))
-    {
-        if ($_SESSION["Username"] === $authenticate[$index]["Username"])
-        {
-            if (($password_hash === $authenticate[$index]["Password"]) && ($authenticate[$index]["Status"] === "Active"))
+    require_once ("connect.php");
+    try {
+        $username = $_POST["Username"];
+        $result = $conn->prepare("UPDATE camagru.users SET Status = 'Active' WHERE Username='$username'");
+        $result->execute();
+        $password_hash = hash("sha512", $_POST["Password"]);
+        $statement = $conn->prepare("SELECT Username, Password, Status FROM users");
+        $status = $conn->prepare("SELECT Status FROM camagru.users");
+        $authenticate = array(
+            $_POST['Username'],
+            $password_hash
+        );
+        $index = 0;
+        // header("location: Disconnected.html");
+            if ($username === $authenticate[0])
             {
-                $statement_2 = $db->prepare("UPDATE users SET Connection='Online' WHERE Username=?");
-                $statement_2->bindValue(1, $_SESSION["Username"]);
-                $statement_2->execute();
-                header("location: user_gallery.php");
+                if (($password_hash === $authenticate[1]))
+                {
+                    header("location: user_gallery.php");
+                }
             }
-        }
-        $index++;
+        session_destroy();
+    }
+    catch(PDOException $e){
+        print_r($e);
     }
 ?>

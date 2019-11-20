@@ -1,13 +1,4 @@
-<?php
-    include ("connect.php");
-    session_start();
-    
-    //$username = $_SESSION["Username"];
-    // $vkey = $_GET['token'];
-    // $result = $conn->prepare("SELECT Token FROM camagru.users WHERE Username='$username'");
-    // $db_vkey = $result->fetch();
-    //Dont forget to destroy sessions.
-?>
+
 <html>
     <head>
         <title>Verified</title>
@@ -32,16 +23,19 @@
                 font-size: 20px;
                 margin-left: 20px;
             }
+            .link {
+                font-size: 20px;
+            }
         </style>
     </head>
     <body>
         <header>
-            <span class="header">CAMAGRU</span>
+            <!-- <span class="header">CAMAGRU</span> -->
         </header>
         <section class="confirm">
             <span class="text">Success!</span>
             <p class="text_2">Congratulations. You have successfully verified your Email.</p><br/>
-            <a href="index.php">Click Here to go back to Camagru</a>
+            <a href="user_gallery.php" class = "link">Click Here to go back to Camagru</a>
         </section>
     </body>
 </html>

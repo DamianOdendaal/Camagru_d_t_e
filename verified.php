@@ -35,7 +35,7 @@
         <section class="confirm">
             <span class="text">Success!</span>
             <p class="text_2">Congratulations. You have successfully verified your Email.</p><br/>
-            <a href="user_gallery.php" class = "link">Click Here to go back to Camagru</a>
+            <a href="login.php" class = "link">Click here to go back to Camagru</a>
         </section>
     </body>
 </html>

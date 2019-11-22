@@ -1,23 +1,48 @@
 <?php
     include ("connect.php");
-   // include ("delete_info.php");
     session_start();
     $_SESSION['pic_loc'] = $_GET['pic'];
+
+  
     if (isset($_POST['comment']))
     {
-        $result = $db->prepare("INSERT INTO `user_comments` (`Comment`, `Username`, `Image`) VALUES (?, ?, ?)");
+        //mailing the notification on comment.
+        $image = $_GET['pic'];
+        $result_set = $conn->query("SELECT Username FROM camagru.images WHERE Image='$image'");
+        $image_owner = $result_set->fetch();
+        $result_set1 = $conn->query("SELECT Email FROM camagru.users WHERE Username='$image_owner[0]'");
+        $email = $result_set1->fetch();
+        $commentor = $_SESSION['Username'];
+        $subject = "Recent activity";
+        $msg = "$commentor has recently commented on your image";
+        mail($email[0], $subject, $msg);
+
+        // storing comments 
+        $result = $conn->prepare("INSERT INTO camagru.`comments` (`Comment`, `Username`, `Image`) VALUES (?, ?, ?)");
         $result->bindValue(1, $_POST['comment']);
         $result->bindValue(2, $_SESSION['Username']);
         $result->bindValue(3, $_GET['pic']);
         $result->execute();
     }
     $img = $_GET['pic'];
-    $result_01 = $db->query("SELECT * FROM user_likes WHERE Image='$img'");
-    $amount = $result_01->fetchall();
+    $result1 = $conn->query("SELECT * FROM camagru.likes WHERE Image='$img'");
+    $amount = $result1->fetchall();
     $likes = count($amount);
     if (isset($_POST['like']))
     {
-        $result_00 = $db->prepare("INSERT INTO `user_likes` (`Username`, `Image`) VALUES (?, ?)");
+        //sending likes notification.
+        $image = $_GET['pic'];
+        $result_set = $conn->query("SELECT Username FROM camagru.images WHERE Image='$image'");
+        $image_owner = $result_set->fetch();
+        $result_set_01 = $conn->query("SELECT Email FROM camagru.users WHERE Username='$image_owner[0]'");
+        $email = $result_set_01->fetch();
+        $liker = $_SESSION['Username'];
+        $subject = "Recent activity";
+        $msg = "$liker has recently liked your image";
+        mail($email[0], $subject, $msg);
+
+        //storing likes/
+        $result_00 = $conn->prepare("INSERT INTO camagru.`likes` (`Username`, `Image`) VALUES (?, ?)");
         $result_00->bindValue(1, $_SESSION['Username']);
         $result_00->bindValue(2, $_GET['pic']);
         $result_00->execute();
@@ -75,11 +100,10 @@
             <?php if ($_SESSION)
             { 
                 $image_path = $_GET['pic'];
-                $result_set = $db->query("SELECT Username FROM user_images WHERE Image='$image_path'");
+                $result_set = $conn->query("SELECT Username FROM camagru.images WHERE Image='$image_path'");
                 $array = $result_set->fetchall();
                 if (count($array) > 0)
                 {
-                    var_dump($array);
                     if ($_SESSION['Username'] == $array[0]['Username'])
                     {
                 ?>
@@ -113,7 +137,7 @@
     if ($_SESSION)
     {
         $image = $_GET['pic'];
-        $result_01 = $db->query("SELECT Comment, Username FROM user_comments WHERE Image = '$image'");
+        $result_01 = $conn->query("SELECT Comment, Username FROM camagru.comments WHERE Image = '$image'");
         $array = $result_01->fetchall();
         echo '<html>';
         echo '<textarea rows="4" cols="60" style="margin-top: 5px;" readonly>';

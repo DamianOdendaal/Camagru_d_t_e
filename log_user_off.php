@@ -1,9 +1,13 @@
 <?php
     session_start();
     include ("connect.php");
-    $statement = $conn->prepare("UPDATE users SET Connection='Offline' WHERE Username=?");
+    $link = "http://";
+    $name = "/camagru_d_t_e";
+    $homepage = $link.$_SERVER['HTTP_HOST'].$name."/index.php";
+
+    $statement = $conn->prepare("UPDATE camagru.users SET Status='Inactive' WHERE Username=?");
     $statement->bindValue(1, $_SESSION["Username"]);
     $statement->execute();
     session_destroy();
-    header("location: http://localhost:8081/index.php");
+    header("location: $homepage");
 ?>

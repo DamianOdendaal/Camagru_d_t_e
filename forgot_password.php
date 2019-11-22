@@ -97,7 +97,7 @@
             <fieldset class="border">
                 <legend>Forgot Password</legend>
                 <img class="logo" src="Pictures/Untitled.png">
-                <p><input class="bs" type="text" name="Email" Placeholder=" Enter Email" pattern="{1,}" title="Email is not valid" required></p>
+                <p><input class="bs" type="email" name="Email" Placeholder="Enter Email" pattern="{1,}" title="Email is not valid" required></p>
                 <input class="submit" type="submit" name="Submit" value="Send Link">
             </fieldset>
         </form>

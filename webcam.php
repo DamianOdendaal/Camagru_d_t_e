@@ -110,10 +110,11 @@
             <a class="logout" href="log_user_off.php">logout</a>
         </header>
         <nav>
-            <a class="post" href="user_gallery.php">POST</a>
-            <a class="cam" href="webcam.php">CAMERA</a>
-            <a class="gal" href="pagination.php">GALLERY</a>
-            <a class="user_gal" href="my_gallery.php">MY_GALLERY</a>
+        <a class="cam" href="webcam.php">CAMERA</a>
+                <a class="cam" href="pagination.php">GALLERY</a>
+                <a class="gal" href="user_gallery.php">POST</a>
+                <a class="user_gal" href="my_gallery.php">MY_GALLERY</a>
+                <a class="user_gal" href="edit_info.php">Edit_Profile</a>
         </nav>
          <div class="booth">
             <video id="video" width="400px" height="300px"></video>

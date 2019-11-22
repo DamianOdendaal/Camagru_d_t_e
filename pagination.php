@@ -21,7 +21,7 @@
         $items_array = $statement->fetchall();
         //var_dump($items_array);
         //get the total number of pages.
-        $result_set = $conn->query("SELECT * FROM user_images");
+        $result_set = $conn->query("SELECT * FROM camagru.images");
         $array = $result_set->fetchall();
         $total_items = count($array);
         $total_pages = ceil($total_items / $total_items_per_page);
@@ -120,10 +120,11 @@
         <body>
             <nav>
                 <?php if ($_SESSION) { ?>
-                <a class="post" href="user_gallery.php">POST</a>
-                <a class="cam" href="webcam.php">CAMERA</a>
-                <a class="gal" href="pagination.php">GALLERY</a>
+                    <a class="cam" href="webcam.php">CAMERA</a>
+                <a class="cam" href="pagination.php">GALLERY</a>
+                <a class="gal" href="user_gallery.php">POST</a>
                 <a class="user_gal" href="my_gallery.php">MY_GALLERY</a>
+                <a class="user_gal" href="edit_info.php">Edit_Profile</a>
                 <?php } else {?>
                 <a class="gal" href="pagination.php">GALLERY</a>
                 <a class="gal" href="sign_up.php">SIGNUP</a>

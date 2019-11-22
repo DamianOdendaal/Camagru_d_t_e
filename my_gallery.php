@@ -3,7 +3,7 @@
     include ("connect.php");
     if (isset($_POST['delete']))
     {
-        $result_set = $db->prepare("DELETE FROM user_images WHERE Image=?");
+        $result_set = $conn->prepare("DELETE FROM camagru.images WHERE Image=?");
         $result_set->bindValue(1, $_SESSION['pic_loc']);
         $result_set->execute();
         $new_path = explode('/', $_SESSION['pic_loc']);
@@ -21,7 +21,7 @@
         $page_no = 1;
     }
     //Set the offset for the query
-    $statement = $db->query("SELECT Image FROM user_images WHERE Username='$user'");
+    $statement = $conn->query("SELECT Image FROM camagru.images WHERE Username='$user'");
     $items_array = $statement->fetchall();
 ?><!DOCTYPE html>
 <html>
@@ -112,10 +112,12 @@
         </header>
         <body>
             <nav>
-                <a class="post" href="user_gallery.php">POST</a>
+                <!-- <a class="post" href="user_gallery.php">POST</a> -->
                 <a class="cam" href="webcam.php">CAMERA</a>
-                <a class="gal" href="pagination.php">GALLERY</a>
+                <a class="cam" href="pagination.php">GALLERY</a>
+                <a class="gal" href="user_gallery.php">POST</a>
                 <a class="user_gal" href="my_gallery.php">MY_GALLERY</a>
+                <a class="user_gal" href="edit_info.php">Edit_Profile</a>
             </nav>
             <main style="position: relative; top: 60px; left: 10px">
                 <?php

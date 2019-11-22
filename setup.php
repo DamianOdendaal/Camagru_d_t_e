@@ -21,6 +21,8 @@
 
     try 
 	{
+		$drop = "DROP DATABASE if EXISTS $DB_NAME";
+		$conn->exec($drop);
 		$sql = "CREATE DATABASE IF NOT EXISTS $DB_NAME";
 		$conn->exec($sql);
 		echo "Database created successfully<br/>";
@@ -34,7 +36,8 @@
 			`Password` text NOT NULL,
 			`Email` varchar(255) NOT NULL,
 			`Token` varchar(255) NOT NULL,
-			`Status` varchar(10) DEFAULT 'Inactive'
+			`Status` varchar(10) DEFAULT 'Inactive',
+			`Notification` varchar(255) DEFAULT 'YES'
 		  )"; 
 		$conn->exec($sql);
         echo "The users table was successfully created<br/>";
@@ -43,6 +46,7 @@
 		$sql = "CREATE TABLE IF NOT EXISTS images 
 		(
 			ID INT(255) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+			Image VARCHAR(255) NOT NULL,
 			Username VARCHAR(255) NOT NULL
 		)";
 		$conn->exec($sql);

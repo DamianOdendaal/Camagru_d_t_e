@@ -151,7 +151,7 @@
             .password {
                 position: relative;
                 top: 70px;
-                left: -420px;
+                left: -365PX;
                 margin-right: 5px;
             }
             .P_title {
@@ -159,7 +159,7 @@
                 font-size: 15px;
                 position: relative;
                 top: 60px;
-                left: -420px;
+                left: -365PX;
             }
             .E_title {
                 font-family: monospace;
@@ -240,7 +240,7 @@
                 <form action="update_info.php" method="post">
                     <span class="P_title">Edit password</span>
                     <br />
-                    <input class="password" type="text" name="new_pass" placeholder="New Password">
+                    <input class="password" type="password" name="new_pass" placeholder="New Password">
                     <input class="password" type="password" name="old_pass" placeholder="Old Password">
                     <input class="password" type="submit" value="submit" value="submit">
                 </form>

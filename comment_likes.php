@@ -13,8 +13,8 @@
         $result_set1 = $conn->query("SELECT Email FROM camagru.users WHERE Username='$image_owner[0]'");
         $email = $result_set1->fetch();
         $commentor = $_SESSION['Username'];
-        $subject = "Recent activity";
-        $msg = "$commentor has recently commented on your image";
+        $subject = "<i>Camagru</i> - Image Comment";
+        $msg = "$commentor has recently commented on your image. Lets go see what $commentor said about your picture!";
         mail($email[0], $subject, $msg);
 
         // storing comments 
@@ -37,8 +37,8 @@
         $result_set_01 = $conn->query("SELECT Email FROM camagru.users WHERE Username='$image_owner[0]'");
         $email = $result_set_01->fetch();
         $liker = $_SESSION['Username'];
-        $subject = "Recent activity";
-        $msg = "$liker has recently liked your image";
+        $subject = "<i>Camagru</i> - You got a like!";
+        $msg = "$liker has recently liked your image. Lets go see which picture $liker liked";
         mail($email[0], $subject, $msg);
 
         //storing likes/
@@ -140,13 +140,13 @@
         $result_01 = $conn->query("SELECT Comment, Username FROM camagru.comments WHERE Image = '$image'");
         $array = $result_01->fetchall();
         echo '<html>';
-        echo '<textarea rows="4" cols="60" style="margin-top: 5px;" readonly>';
-                    $x = 0;
-                    while ($x < count($array))
+        echo '<textarea rows="4" cols="60" style="margin-top: 5px; resize: none;" readonly>';
+                    $index = 0;
+                    while ($index < count($array))
                     {
-                        echo $array[$x]['Username'].": ".$array[$x]['Comment'];
+                        echo $array[$index]['Username'].": ".$array[$index]['Comment'];
                         echo "\n";
-                        $x++;
+                        $index++;
                     }
         echo '</textarea>';
         echo '';

@@ -116,14 +116,14 @@
     </head>
     <body>
         <header class="heading">
-            <img class="logo" src="Pictures/Untitled.png">
-            <a href="user_gallery.php"><img class="gallery" src="Pictures/gallery.png"></a>
+            <center><img class="logo" src="Pictures/Untitled.png">
+            <a href="user_gallery.php"><img class="gallery" src="Pictures/gallery.png"></a></center>
             <a class="logout" href="log_user_off.php">logout</a>
         </header>
         <nav>
-            <a class="post" href="user_gallery.php">POST</a>
-            <a class="cam" href="webcam.php">CAMERA</a>
-            <a class="gal" href="pagination.php">GALLERY</a>
+                <a class="post" href="user_gallery.php">POST</a>
+                <a class="cam" href="webcam.php">CAMERA</a>
+                <a class="gal" href="pagination.php">GALLERY</a>
         </nav>
         <div>
             <?php
@@ -132,8 +132,8 @@
             ?>
             <img class="img_filter" src='<?php echo $_SESSION['tmp_loc'];?>'>
             <br />
-            <a class="upload_b" href="upload_2.php">upload</a>
-            <a class="go_back" href="webcam.php">Go Back</a>
+            <a class="upload_b" href="upload_2.php"><button>upload</button></a>
+            <a class="go_back" href="webcam.php"><button>Cancel</button></a>
         </div>
     </body>
 </html>

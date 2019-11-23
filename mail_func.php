@@ -39,8 +39,8 @@
 // include_once 'reset.php';
 function sendVerification($email, $token, $url){
 $subject = "<i>Camagru</i> - Email Verification";
-$header = 'MIME-Version: 1.0'."\r\n";
-$header .= 'Content-type: text/html; charset=UTF-8'."\r\n";
+// $header = 'MIME-Version: 1.0'."\r\n";
+// $header .= 'Content-type: text/html; charset=UTF-8'."\r\n";
 $header .= 'From: Camagru@DoNotReply.co.za'."\r\n";
 $pro_name = explode("/", $_SERVER['SCRIPT_NAME']);
 $var = $_SERVER['HTTP_HOST'];
@@ -65,7 +65,7 @@ if ($retval == true)
 else
     echo "Error";
 }
-// $email = 'tmentor@mailinator.com';
+// $email = 'damian@mailinator.com';
 // $token = 'lol';
 // $url = 'pathway';
 // sendVerification($email, $token, $url);

@@ -15,7 +15,9 @@
         $commentor = $_SESSION['Username'];
         $subject = "<i>Camagru</i> - Image Comment";
         $msg = "$commentor has recently commented on your image. Lets go see what $commentor said about your picture!";
-        mail($email[0], $subject, $msg);
+        if ($_SESSION['Pref'] == "Yes"){
+            mail($email[0], $subject, $msg);
+        }
 
         // storing comments 
         $result = $conn->prepare("INSERT INTO camagru.`comments` (`Comment`, `Username`, `Image`) VALUES (?, ?, ?)");
@@ -39,7 +41,9 @@
         $liker = $_SESSION['Username'];
         $subject = "<i>Camagru</i> - You got a like!";
         $msg = "$liker has recently liked your image. Lets go see which picture $liker liked";
-        mail($email[0], $subject, $msg);
+        if ($_SESSION['Pref'] == "Yes"){
+            mail($email[0], $subject, $msg);
+        }
 
         //storing likes/
         $result_00 = $conn->prepare("INSERT INTO camagru.`likes` (`Username`, `Image`) VALUES (?, ?)");
@@ -84,7 +88,7 @@
     </head>
     <body>
         <header class="heading">
-            <img class="logo" src="Pictures/Untitled.png">
+            <a href ="user_gallery.php"><img class="logo" src="Pictures/Untitled.png"></a>
             <?php if ($_SESSION) {?>
             <a class="logout" href="log_user_off.php">logout</a>
             <?php }?>

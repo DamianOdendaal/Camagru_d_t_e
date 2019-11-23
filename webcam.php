@@ -82,7 +82,7 @@
             }
             #canvas {
                 position: relative;
-                top: 40px;
+                top: 5px;
                 left: 218px;
                 border: 2px solid black;
                 display:;
@@ -102,6 +102,9 @@
                 margin-left: 15px;
                 float: left;
             }
+            button {
+                margin-top: 40px;
+            }
         </style>
     </head>
     <body>
@@ -118,9 +121,9 @@
         </nav>
          <div class="booth">
             <video id="video" width="400px" height="300px"></video>
-            <a href="#" id="pic_button">take pic</a>
+            <button><a href="#" id="pic_button">take pic</a></button>
             <canvas id="canvas" width="400px" height="300px"></canvas>
-            <img id="image" src="">
+            <!-- <img id="image" src="" hidden> -->
         </div>
         <div style="position: relative; top: 100px; left: 20px;">
             <form action="process_img.php" method="post" onsubmit="upload_img();">

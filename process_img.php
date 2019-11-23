@@ -6,7 +6,7 @@
     $img = str_replace(' ', '+', $img);
     $data = base64_decode($img);
     $file = 'Uploads/img'.date('YmdHis').'.png';
-    $result = $db->prepare("INSERT INTO `user_images` (`Image`, `Username`) VALUES (?, ?)");
+    $result = $conn->prepare("INSERT INTO camagru.`images` (`Image`, `Username`) VALUES (?, ?)");
     $result->bindValue(1, $file);
     $result->bindValue(2, $_SESSION['Username']);
     $result->execute();

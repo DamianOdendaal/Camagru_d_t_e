@@ -5,6 +5,7 @@
          context = canvas.getContext('2d'),
          image = document.getElementById('image');
      var inp_img = document.getElementById('img_sub');
+     
      navigator.getMedia = navigator.getUserMedia ||
          navigator.webkitGetUserMedia ||
          navigator.mozGetUserMedia ||

@@ -58,11 +58,13 @@
                 $prefence = $_POST['notification'];
                 if ($prefence == "Yes")
                 {
-                    $conn->query("UPDATE camagru.users SET Notifications='$prefence' WHERE Username='$username'");
+                    $conn->query("UPDATE camagru.users SET Notification='$prefence' WHERE Username='$username'");
+                    $_SESSION['Pref'] = "Yes";
                 }
                 if ($prefence == "No")
                 {
-                    $conn->query("UPDATE camagru.users SET Notifications='$prefence' WHERE Username='$username'");
+                    $conn->query("UPDATE camagru.users SET Notification='$prefence' WHERE Username='$username'");
+                    $_SESSION['Pref'] = "No";
                 }
             }
         }

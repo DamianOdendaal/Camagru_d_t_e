@@ -10,8 +10,6 @@
         $statement = $conn->query("SELECT Username, Password, Status FROM camagru.users");
         $status = $conn->prepare("SELECT Status FROM camagru.users");
         $authenticate = $statement->fetchall();
-        // print_r($authenticate);
-        // echo $authenticate[0][1];
 
         $index = 0;
             if ($_SESSION['Username'] === $authenticate[0][0])
@@ -24,7 +22,6 @@
                 else
                     echo "Invalid Password";
             }
-        // session_destroy();
     }
     catch(PDOException $e){
         print_r($e);

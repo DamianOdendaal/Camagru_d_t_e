@@ -1,28 +1,41 @@
 <?php
-    session_start();
-    include ("connect.php");
-    if (isset($_POST['delete']))
-    {
-        $result_set = $conn->prepare("DELETE FROM camagru.images WHERE Image=?");
-        $result_set->bindValue(1, $_SESSION['pic_loc']);
-        $result_set->execute();
-        $new_path = explode('/', $_SESSION['pic_loc']);
-        rename($_SESSION['pic_loc'], "Trash/$new_path[1]");
+     session_start();
+     if (isset($_SESSION['Username']))
+     {
+            include ("connect.php");
+            if (isset($_POST['delete']))
+            {
+                $result_set = $conn->prepare("DELETE FROM camagru.images WHERE Image=?");
+                $result_set->bindValue(1, $_SESSION['pic_loc']);
+                $result_set->execute();
+                $new_path = explode('/', $_SESSION['pic_loc']);
+                rename($_SESSION['pic_loc'], "Trash/$new_path[1]");
+            }
+            $user = $_SESSION['Username'];
+            $total_items_per_page = 10;
+            //get current page.
+            if (isset($_GET['page']))
+            {
+                $page_no = $_GET['page'];
+            }
+            else
+            {
+                $page_no = 1;
+            }
     }
-    $user = $_SESSION['Username'];
-    $total_items_per_page = 10;
-    //get current page.
-    if (isset($_GET['page']))
-    {
-        $page_no = $_GET['page'];
-    }
-    else
-    {
-        $page_no = 1;
-    }
-    //Set the offset for the query
-    $statement = $conn->query("SELECT Image FROM camagru.images WHERE Username='$user'");
-    $items_array = $statement->fetchall();
+         //Set the offset for the query
+        $offset = ($page_no - 1) * $total_items_per_page;
+        $statement = $conn->query("SELECT Image, Username FROM camagru.images LIMIT $offset, $total_items_per_page");
+        if ($statement)
+        {
+            $items_array = $statement->fetchall();
+
+            //get the total number of pages.
+            $result_set = $conn->query("SELECT * FROM camagru.images");
+            $array = $result_set->fetchall();
+            $total_items = count($array);
+            $total_pages = ceil($total_items / $total_items_per_page);
+        }
 ?><!DOCTYPE html>
 <html>
     <head>
@@ -108,26 +121,52 @@
     <body>
         <header class="heading">
             <img class="logo" src="Pictures/Untitled.png">
+            <?php 
+            if (isset($_SESSION['Username']))
+            { ?>
             <a class="logout" href="log_user_off.php">logout</a>
+            <?php }?>
         </header>
         <body>
             <nav>
-                <!-- <a class="post" href="user_gallery.php">POST</a> -->
+                <?php if (isset($_SESSION['Username'])) { ?>
+                <a class="post" href="user_gallery.php">POST</a>
                 <a class="cam" href="webcam.php">CAMERA</a>
-                <a class="cam" href="pagination.php">GALLERY</a>
-                <a class="gal" href="user_gallery.php">POST</a>
+                <a class="gal" href="pagination.php">GALLERY</a>
                 <a class="user_gal" href="my_gallery.php">MY_GALLERY</a>
-                <a class="user_gal" href="edit_info.php">Edit_Profile</a>
+                <a class="user_gal" href="edit_info.php">EDIT_INFO</a>
+                <?php } else {?>
+                <a class="gal" href="pagination.php">GALLERY</a>
+                <a class="gal" href="sign_up.php">SIGNUP</a>
+                <a class="gal" href="login.html">LOGIN</a>
+                <?php }?>
             </nav>
-            <main style="position: relative; top: 60px; left: 10px">
+            <main>
+                <form action="pagination.php" method="get">
+                    <?php
+                    if ($statement)
+                    {
+                        $x = 1;
+                        $y = 1;
+                        $x = $total_pages;
+                        while ($x >= 1)
+                        {?>
+                    <input class="upload_button" type="submit" value='<?php echo $x?>' name="page"/>
+                    <?php
+                        $x--;
+                        }
+                    ?>
+                </form>
                 <?php
-                    $y = 0;
-                    while ($y < count($items_array))
+                    $y = count($items_array);
+                    $y--;
+                    while ($y >= 0)
                     {
                 ?>
                 <a href='comment_likes.php?pic=<?php echo $items_array[$y]['Image']?>' target='_self'><img style="padding: 1px;"width="160px" height="156px" src='<?php echo $items_array[$y]['Image'];?>'></a>
                 <?php
-                     $y++;
+                     $y--;
+                    }
                     }
                 ?>
             </main>

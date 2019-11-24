@@ -1,7 +1,6 @@
 <?php
     session_start();
     include ("connect.php");
-    print_r($_POST);
     $img = $_POST['img'];
     $img = str_replace('data:image/png;base64,', '', $img);
     $img = str_replace(' ', '+', $img);
@@ -12,5 +11,5 @@
     $result->bindValue(2, $_SESSION['Username']);
     $result->execute();
     file_put_contents($file, $data);
-    // header("location: webcam.php");
+    header("location: webcam.php");
 ?>

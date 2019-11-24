@@ -1,31 +1,3 @@
-<?php
-    session_start();
-    include ("connect.php");
-    if ($_SESSION)
-    {
-        $user = $_SESSION['Username'];
-    }
-        $total_items_per_page = 10;
-        //get current page.
-        if (isset($_GET['page']))
-        {
-            $page_no = $_GET['page'];
-        }
-        else
-        {
-            $page_no = 1;
-        }
-        //Set the offset for the query
-        $offset = ($page_no - 1) * $total_items_per_page;
-        $statement = $conn->query("SELECT Image, Username FROM camagru.images LIMIT $offset, $total_items_per_page");
-        $items_array = $statement->fetchall();
-        //var_dump($items_array);
-        //get the total number of pages.
-        $result_set = $conn->query("SELECT * FROM camagru.images");
-        $array = $result_set->fetchall();
-        $total_items = count($array);
-        $total_pages = ceil($total_items / $total_items_per_page);
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -82,13 +54,13 @@
             .upload {
                 margin-top: 120px;
                 position: relative;
-                left: -210px;
+                left: -322px;
             }
             .upload_button {
                 margin-top: 120px;
                 margin-left: 10px;
                 position: relative;
-                left: -230px;
+                left: -350px;
             }
             .gal {
                 font-size: 30px;
@@ -106,53 +78,53 @@
                 margin-left: 15px;
                 float: left;
             }
+            .img {
+                width: 400px;
+                height: 400px;
+                margin-left: 8%;
+            }
         </style>
+            <script language = "Javascript">
+                function GetFile(e){
+                    var FormInput = document.getElementById('up_img'),
+                    fileReader = new FileReader();
+                    fileReader.readAsDataURL(FormInput.files[0]);
+                    fileReader.onloadend = function (e){
+                        var string = e.target.result,
+                        ImgElem = document.getElementById('ImageFile');
+                        ImgElem.src = string;
+                
+                        function image_upload(){
+                            var image = document.getElementById('image'),
+                            canvas = document.getElementById('canvas');
+                            image.setAttribute('value', canvas.toDataURL('image/png'));
+                        }
+                    }
+
+                }
+            </script>
     </head>
     <body>
         <header class="heading">
             <img class="logo" src="Pictures/Untitled.png">
-            <?php 
-            if ($_SESSION)
-            { ?>
             <a class="logout" href="log_user_off.php">logout</a>
-            <?php }?>
         </header>
         <body>
             <nav>
-                <?php if ($_SESSION) { ?>
-                    <a class="cam" href="webcam.php">CAMERA</a>
+            <a class="cam" href="webcam.php">CAMERA</a>
                 <a class="cam" href="pagination.php">GALLERY</a>
                 <a class="gal" href="user_gallery.php">POST</a>
                 <a class="user_gal" href="my_gallery.php">MY_GALLERY</a>
                 <a class="user_gal" href="edit_info.php">Edit_Profile</a>
-                <?php } else {?>
-                <a class="gal" href="pagination.php">GALLERY</a>
-                <a class="gal" href="sign_up.php">SIGNUP</a>
-                <a class="gal" href="login.php">LOGIN</a>
-                <?php }?>
             </nav>
-            <main>
-                <form action="pagination.php" method="get">
-                    <?php
-                    $x = 1;
-                    while ($x <= $total_pages)
-                    {?>
-                    <input class="upload_button" type="submit" value='<?php echo $x?>' name="page"/>
-                    <?php
-                    $x++;
-                    }?>
+             <!-- <main>
+              <form action="process_post.php" method="post" enctype="multipart/form-data" onsubmit="image_upload();">
+                    <input id="image" name="img" type="hidden" value="">
+                    <input class="upload" type="file" id = "up_img" name="file" onchange="GetFile(event)" >
+                    <input class="upload_button" type="submit" name="submit" value="Upload">
                 </form>
-                <?php
-                    $y = 0;
-                    while ($y < count($items_array))
-                    {
-                ?>
-                <a href='comment_likes.php?pic=<?php echo $items_array[$y]['Image']?>' target='_self'><img style="padding: 1px;"width="160px" height="156px" src='<?php echo $items_array[$y]['Image'];?>'></a>
-                <?php
-                     $y++;
-                    }
-                ?>
-            </main>
+             </main> 
+            <img src="" id="ImageFile" class="img" name="image">  -->
         </body>
     </body>
 </html>

@@ -3,9 +3,9 @@
          vendorUrl = window.URL || window.webkitURL,
          canvas = document.getElementById('canvas'),
          context = canvas.getContext('2d'),
-         image = document.getElementById('image');
-     var inp_img = document.getElementById('img_sub');
-     
+        //  image = document.getElementById('image');
+        inp_img = document.getElementById('img_sub');
+
      navigator.getMedia = navigator.getUserMedia ||
          navigator.webkitGetUserMedia ||
          navigator.mozGetUserMedia ||

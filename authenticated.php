@@ -7,20 +7,22 @@
         $result = $conn->prepare("UPDATE camagru.users SET Status = 'Active' WHERE Username='$username'");
         $result->execute();
         $password_hash = hash("sha512", $_POST["Password"]);
-        $statement = $conn->prepare("SELECT Username, Password, Status FROM users");
+        $statement = $conn->query("SELECT Username, Password, Status FROM camagru.users");
         $status = $conn->prepare("SELECT Status FROM camagru.users");
-        $authenticate = array(
-            $_SESSION['Username'],
-            $password_hash
-        );
+        $authenticate = $statement->fetchall();
+        // print_r($authenticate);
+        // echo $authenticate[0][1];
+
         $index = 0;
-        // header("location: Disconnected.html");
-            if ($_SESSION['Username'] === $authenticate[0])
+            if ($_SESSION['Username'] === $authenticate[0][0])
             {
-                if (($password_hash === $authenticate[1]))
+                if (($password_hash === $authenticate[0][1]))
                 {
-                    header("location: user_gallery.php");
+                    header("location: index_logged.php");
+                    // echo "This should work!";
                 }
+                else
+                    echo "Invalid Password";
             }
         // session_destroy();
     }

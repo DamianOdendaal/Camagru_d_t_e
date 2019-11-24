@@ -248,12 +248,12 @@
                 </form>
                 <form action="" method="post">
                     <span class="E_title">Edit email</span>
-                    <input class="email" class="email" type="email" name="email" placeholder="Enter Email">
+                    <input class="email" class="email" type="email" name="email" placeholder="Enter new Email">
                     <input class="email" type="submit" value="submit">
                 </form>
                 <form action="" method="post">
                     <span class="U_title">Edit username</span>
-                    <input class="username" type="text" name="username" placeholder="Enter Username">
+                    <input class="username" type="text" name="username" placeholder="Enter new Username">
                     <input class="username" type="submit" value="submit">
                 </form>
                 <form action="" method="post">

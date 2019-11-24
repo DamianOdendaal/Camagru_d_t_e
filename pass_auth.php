@@ -3,6 +3,7 @@
     include ("connect.php");
     $_SESSION["Email_P"] = $_POST["Email"];;
     $email = $_SESSION["Email_P"];
+    $subject = "<i>Camagru</i> - Password Reset";
     $header = 'MIME-Version: 1.0'."\r\n";
     $header .= 'Content-type: text/html; charset=UTF-8'."\r\n";
     $header .= 'From: Camagru@DoNotReply.co.za'."\r\n";

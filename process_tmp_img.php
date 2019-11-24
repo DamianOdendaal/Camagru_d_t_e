@@ -1,6 +1,7 @@
 <?php
     session_start();
     include ("connect.php");
+    // print_r($_POST);
     if (array_key_exists("s1", $_POST))
         $img = $_POST['s1'];
     elseif (array_key_exists("s2", $_POST))
@@ -26,7 +27,6 @@
         imagecopymerge($dst, $src, 0, 0, 10, 10, 50, 50, 100);
     elseif (array_key_exists("s3", $_POST))
         imagecopymerge($dst, $src, 0, 0, 10, 10, 50, 50, 100);
-   // header("location: filter_up.php");
     imagepng($dst, $file);
     imagedestroy($dst);
     imagedestroy($src);

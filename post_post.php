@@ -54,13 +54,13 @@
             .upload {
                 margin-top: 120px;
                 position: relative;
-                left: -322px;
+                left: -210px;
             }
             .upload_button {
                 margin-top: 120px;
                 margin-left: 10px;
                 position: relative;
-                left: -350px;
+                left: -230px;
             }
             .gal {
                 font-size: 30px;
@@ -70,61 +70,72 @@
                 margin-left: 15px;
                 float: left;
             }
-               .user_gal {
-                font-size: 30px;
-                color: #2f2e2f;
+            .booth {
                 position: relative;
-                top: 12px;
-                margin-left: 15px;
-                float: left;
+                top: 45px;
+                left: -200px;
             }
-            .img {
+            .pic_button {
+                position: relative;
+                top: 30px;
+                left: -250px;
+            }
+            #canvas {
                 width: 400px;
+                height: 300px;
+                position: relative;
+                top: 40px;
+                left: 218px;
+                border: 2px solid black;
+                display: none;
+            }
+            #image {
+                width: 400px;
+                height: 300px;
+                position: relative;
+                top: 40px;
+                left: 218px;
+                border: 2px solid black;
+            }
+            .img_filter {
+                position: relative;
+                left: -205px;
+                top: 50px;
                 height: 400px;
-                margin-left: 8%;
+                width:400px;
+            }
+            .upload_b {
+                position: relative;
+                top: 55px;
+                left: 12px;
+            }
+            .go_back {
+                position: relative;
+                top: 55px;
+                left: 170px;
             }
         </style>
-            <script language = "Javascript">
-                function GetFile(e){
-                    var FormInput = document.getElementById('up_img'),
-                    fileReader = new FileReader();
-                    fileReader.readAsDataURL(FormInput.files[0]);
-                    fileReader.onloadend = function (e){
-                        var string = e.target.result,
-                        ImgElem = document.getElementById('ImageFile');
-                        ImgElem.src = string;
-                
-                        function image_upload(){
-                            var image = document.getElementById('image'),
-                            canvas = document.getElementById('canvas');
-                            image.setAttribute('value', canvas.toDataURL('image/png'));
-                        }
-                    }
-
-                }
-            </script>
     </head>
     <body>
         <header class="heading">
-            <img class="logo" src="Pictures/Untitled.png">
+            <center><img class="logo" src="Pictures/Untitled.png">
+            <a href="user_gallery.php"><img class="gallery" src="Pictures/gallery.png"></a></center>
             <a class="logout" href="log_user_off.php">logout</a>
         </header>
-        <body>
-            <nav>
-            <a class="cam" href="webcam.php">CAMERA</a>
-                <a class="cam" href="pagination.php">GALLERY</a>
-                <a class="gal" href="user_gallery.php">POST</a>
-                <a class="user_gal" href="my_gallery.php">MY_GALLERY</a>
-                <a class="user_gal" href="edit_info.php">Edit_Profile</a>
-            </nav>
-             <main>
-              <form action="process_post.php" method="post" enctype="multipart/form-data" onsubmit="image_upload();">
-                    <input id="image" name="img" type="hidden" value="">
-                    <input class="upload" type="file" id = "up_img" name="file" onchange="GetFile(event)" >
-                    <input class="upload_button" type="submit" name="submit" value="Upload">
-                </form>
-             </main> 
-            <img src="" id="ImageFile" class="img" name="image"> 
-        </body>
+        <nav>
+                <a class="post" href="user_gallery.php">POST</a>
+                <a class="cam" href="webcam.php">CAMERA</a>
+                <a class="gal" href="pagination.php">GALLERY</a>
+        </nav>
+        <div>
+            <?php
+                session_start();
+                include "connect.php";
+            ?>
+            <img class="img_filter" src='<?php echo $_SESSION['tmp_loc'];?>'>
+            <br />
+            <a class="upload_b" href="upload_2.php"><button>upload</button></a>
+            <a class="go_back" href="webcam.php"><button>Cancel</button></a>
+        </div>
     </body>
 </html>
